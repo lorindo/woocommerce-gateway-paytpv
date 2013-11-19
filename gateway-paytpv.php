@@ -18,7 +18,6 @@ add_action( 'plugins_loaded', 'woocommerce_paytpv_init', 100 );
 class WC_PayTpv_Dependencies {
 
 	private static $active_plugins;
-	private $ws_client;
 
 	static function init() {
 
@@ -39,6 +38,7 @@ class WC_PayTpv_Dependencies {
 }
 
 function woocommerce_paytpv_init() {
+
 	/**
 	 * Required functions
 	 */
@@ -54,6 +54,8 @@ function woocommerce_paytpv_init() {
 	 * Pasarela PayTpv Gateway Class
 	 * */
 	class woocommerce_paytpv extends WC_Payment_Gateway {
+
+		private $ws_client;
 
 		public function __construct() {
 			$this->id = 'paytpv';
@@ -106,7 +108,7 @@ function woocommerce_paytpv_init() {
 			$this->form_fields = array(
 				'enabled' => array(
 					'title' => __( 'Enable/Disable', 'woothemes' ),
-					'label' => __( 'Habilitar pasarela PayTpv', 'wc_paytpv' ),
+					'label' => __( 'Enable PayTpv gateway', 'wc_paytpv' ),
 					'type' => 'checkbox',
 					'description' => '',
 					'default' => 'no'
@@ -115,50 +117,49 @@ function woocommerce_paytpv_init() {
 					'title' => __( 'Title', 'woothemes' ),
 					'type' => 'text',
 					'description' => __( 'This controls the title which the user sees during checkout.', 'woothemes' ),
-					'default' => __( 'Tarjeta de crédito o débito (vía PayTpv)', 'wc_paytpv' )
+					'default' => __( 'Credit Card (by PayTpv)', 'wc_paytpv' )
 				),
 				'description' => array(
 					'title' => __( 'Description', 'woothemes' ),
 					'type' => 'textarea',
 					'description' => __( 'This controls the description which the user sees during checkout.', 'woothemes' ),
-					'default' => 'Pague con trajeta de crédito de forma segura a través de la pasarela de PayTpv.'
+					'default' => __( 'Pay using your credit card in a secure way', 'wc_paytpv' ),
 				),
 				'product' => array(
-					'title' => __( 'Tipo de producto', 'woothemes' ),
+					'title' => __( 'Product type', 'wc_paytpv' ),
 					'type' => 'select',
-					'description' => __( 'El tipo de producto contratado en paytpv.com.', 'wc_paytpv' ),
-					'default' => 'Pague con trajeta de crédito de forma segura a través de la pasarela de PayTpv.',
+					'description' => __( 'Type of paytpv.com product being used.', 'wc_paytpv' ),
 					'options' => array(
 						0 => 'TPV WEB',
 						1 => 'XML SOAP RECURRENTE'
 					)
 				),
 				'usercode' => array(
-					'title' => __( 'Nombre de usuario', 'wc_paytpv' ),
+					'title' => __( 'User name', 'wc_paytpv' ),
 					'type' => 'text',
 					'description' => '',
 					'default' => ''
 				),
 				'clientcode' => array(
-					'title' => __( 'Código de cliente', 'wc_paytpv' ),
+					'title' => __( 'Client code', 'wc_paytpv' ),
 					'type' => 'text',
 					'description' => '',
 					'default' => ''
 				),
 				'term' => array(
-					'title' => __( 'Número de terminal', 'wc_paytpv' ),
+					'title' => __( 'Terminal', 'wc_paytpv' ),
 					'type' => 'text',
-					'description' => __( 'Número de terminal proporcionado por PayTpv.', 'wc_paytpv' ),
+					'description' => __( 'Terminal number in PayTpv.', 'wc_paytpv' ),
 					'default' => ''
 				),
 				'pass' => array(
-					'title' => __( 'Contraseña', 'wc_paytpv' ),
+					'title' => __( 'Password', 'wc_paytpv' ),
 					'type' => 'text',
-					'description' => __( 'Contraseña proporcionada por PayTpv.', 'wc_paytpv' ),
+					'description' => __( 'Password for PayTpv product.', 'wc_paytpv' ),
 					'default' => ''
 				),
 				'iframe' => array(
-					'title' => __( 'Formulario de pago integrado en un iframe', 'wc_paytpv' ),
+					'title' => __( 'Onsite form in embended iframe', 'wc_paytpv' ),
 					'label' => __( '', 'wc_paytpv' ),
 					'type' => 'checkbox',
 					'default' => 'yes'
@@ -180,15 +181,15 @@ function woocommerce_paytpv_init() {
 		 * */
 		public function admin_options() {
 			?>
-			<h3><?php _e( 'Pasarela PayTpv', 'wc_paytpv' ); ?></h3>
+			<h3><?php _e( 'PayTpv Payment Gateway', 'wc_paytpv' ); ?></h3>
 			<p>
-				La pasarela <a href="https://PayTpv.com">PayTpv Online</a> para Woocommerce le permitirá dar la opción de pago por tarjeta de crédito o débito en su comercio. Para ello necesitará un tpv virtual de PayTpv. Conviene que disponga también de acceso al <a href="https://www.paytpv.com/clientes.php">Área de clientes</a>
+				<?php _e('<a href="https://PayTpv.com">PayTpv Online</a> payment gateway for Woocommerce enables credit card payment in your shop. Al you need is a PayTpv.com merchant account and access to <a href="https://www.paytpv.com/clientes.php">customer area</a>');?>
 			</p>
 			<p>
-				Allí deberá configurar "Tipo de notificación del cobro:" como "Notificación por URL" y configurar ahí la URL: <?php echo add_query_arg( 'tpvLstr', 'notify', add_query_arg( 'wc-api', 'woocommerce_' . $this->id, home_url( '/' ) ) ); ?></p>
+				<?php _e('There you should configure "Tipo de notificación del cobro:" as "Notificación por URL" set ther teh following URL:');?> <?php echo add_query_arg( 'tpvLstr', 'notify', add_query_arg( 'wc-api', 'woocommerce_' . $this->id, home_url( '/' ) ) ); ?></p>
 			</p>
 			<table class="form-table">
-				<?php $this->generate_settings_html(); ?>
+			<?php $this->generate_settings_html(); ?>
 			</table><!--/.form-table-->
 			<?php
 		}
@@ -199,7 +200,7 @@ function woocommerce_paytpv_init() {
 		function check_paytpv_resquest() {
 			if ( !isset( $_GET[ 'tpvLstr' ] ) )
 				return;
-			if ( $this->product == 0 ) {
+			if ( $this->product == 0 ) {//Notificación TPV-WEB
 				if ( $_GET[ 'tpvLstr' ] == 'notify' ) {
 					if ( isset( $_REQUEST[ 'i' ] ) )
 						$importe = number_format( $_REQUEST[ 'i' ] / 100, 2 );
@@ -237,13 +238,43 @@ function woocommerce_paytpv_init() {
 						exit();
 					}
 				}
-			}else {
+			}else {//Notificación BANKSTORE
 				$ref = $_REQUEST[ 'Order' ];
 				$order = new WC_Order( ( int ) substr( $ref, 0, 8 ) );
-				if ( $_GET[ 'tpvLstr' ] == 'notify' ) {
-					if ( $_REQUEST[ 'TransactionType' ] == '1' && $_REQUEST[ 'Response' ] == 'OK' /* && $_REQUEST['Signature']==$signature */ ) {
+				if ( $_GET[ 'tpvLstr' ] == 'pay' && $order->status != 'completed' ) { //PAGO CON TARJETA GUARDADA
+					update_post_meta( ( int ) $order->id, 'IdUser', get_user_meta( ( int ) $order->user_id, 'IdUser', true ) );
+					update_post_meta( ( int ) $order->id, 'TokenUser', get_user_meta( ( int ) $order->user_id, 'TokenUser', true ) );
+
+					$client = $this->get_client();
+					$result = $client->execute_purchase( $order, $order->get_order_total() );
+					$url = $order->get_cancel_order_url();
+					if ( ( int ) $result[ 'DS_RESPONSE' ] == 1 ) {
+						$order->add_order_note( __( 'PayTpv payment completed', 'wc_paytpv' ) );
+						$order->payment_complete();
+						$url = $this->get_return_url( $order );
+					}
+					wp_redirect( $url, 303 );
+					exit();
+				}
+				if ( $_GET[ 'tpvLstr' ] == 'notify' ) {//NOTIFICACIÓN
+					$AMOUNT = round( $order->get_order_total() * 100 );
+					$CURRENCY = get_woocommerce_currency();
+					$mensaje =	$this->clientcode .
+								$this->term .
+								$_REQUEST[ 'TransactionType' ] .
+								$_REQUEST[ 'Order' ] .
+								$AMOUNT .
+								$CURRENCY;
+					$SIGNATURE = md5( $mensaje . md5( $this->pass ) . $_REQUEST[ 'BankDateTime' ] . $_REQUEST[ 'Response' ] );
+					if ( $_REQUEST[ 'TransactionType' ] == '1' && $_REQUEST[ 'Response' ] == 'OK' && $_REQUEST['ExtendedSignature']==$SIGNATURE  ) {
 						update_post_meta( ( int ) $order->id, 'IdUser', $_REQUEST[ 'IdUser' ] );
 						update_post_meta( ( int ) $order->id, 'TokenUser', $_REQUEST[ 'TokenUser' ] );
+						update_user_meta( ( int ) $order->user_id, 'IdUser', $_REQUEST[ 'IdUser' ] );
+						update_user_meta( ( int ) $order->user_id, 'TokenUser', $_REQUEST[ 'TokenUser' ] );
+						$client = $this->get_client();
+						$result = $client->info_user( $_REQUEST[ 'IdUser' ], $_REQUEST[ 'TokenUser' ], get_post_meta( ( int ) $order->id, '_customer_ip_address', true ) );
+						update_user_meta( ( int ) $order->user_id, 'PAN', $result[ 'DS_MERCHANT_PAN' ] );
+
 						$order->add_order_note( __( 'PayTpv payment completed', 'woocommerce' ) );
 						$order->payment_complete();
 					}
@@ -364,8 +395,8 @@ function woocommerce_paytpv_init() {
 
 			$order = new WC_Order( $order_id );
 			$paytpv_args = $this->get_paytpv_args( $order );
-
-			if ( $this->iframe == 'no' ):
+			$is_recurring = class_exists( 'WC_Subscriptions_Order' ) && WC_Subscriptions_Order::order_contains_subscription( $order->id ) ;
+			if ( $this->iframe == 'no' && !$is_recurring):
 				$paytpv_adr = $this->url;
 
 				$paytpv_args_array = array( );
@@ -397,11 +428,22 @@ function woocommerce_paytpv_init() {
 
 				return '<form action="' . esc_url( $paytpv_adr ) . '" method="post" id="paytpv_payment_form" target="_top">
 					' . implode( '', $paytpv_args_array ) . '
-					<input type="submit" class="button-alt" id="submit_paytpv_payment_form" value="' . __( 'Pagar con trajeta de crédito', 'woocommerce' ) . '" /> <a class="button cancel" href="' . esc_url( $order->get_cancel_order_url() ) . '">' . __( 'Cancel order &amp; restore cart', 'woocommerce' ) . '</a>
+					<input type="submit" class="button-alt" id="submit_paytpv_payment_form" value="' . __( 'Credit Card payment', 'wc_paytpv' ) . '" /> <a class="button cancel" href="' . esc_url( $order->get_cancel_order_url() ) . '">' . __( 'Cancel order &amp; restore cart', 'woocommerce' ) . '</a>
 				</form>';
 			else:
-				return '<iframe src="' . $this->iframeurl . '?' . http_build_query( $paytpv_args ) . '"
+				$html = '';
+				$PAN = get_user_meta( ( int ) $order->user_id, 'PAN', true );
+				if ( $PAN != '' ) {
+					$url_pay = add_query_arg( array(
+						'Order' => str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . date( 'is' ),
+						'tpvLstr' => 'pay',
+						'wc-api' => 'woocommerce_' . $this->id ), home_url( '/' ) );
+					$html .= '<div id="card_reuse">' . sprintf( __( 'Use the stored %s credit card to <a href="%s" class="button">pay</a>', 'wc_paytpv' ), $PAN, $url_pay ) . '</div>';
+					$html .= __( 'Or use a different credit card instead', 'wc_paytpv' );
+				}
+				$html .= '<iframe src="' . $this->iframeurl . '?' . http_build_query( $paytpv_args ) . '"
 	name="paytpv" style="width: 670px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-image: initial; height: 322px; " marginheight="0" marginwidth="0" scrolling="no"></iframe>';
+				return $html;
 			endif;
 		}
 
@@ -420,7 +462,7 @@ function woocommerce_paytpv_init() {
 		function scheduled_subscription_payment( $amount_to_charge, $order, $product_id ) {
 			$client = $this->get_client();
 			$result = $client->execute_purchase( $order, $amount_to_charge );
-			if ( (int)$result[ 'DS_ERROR_ID' ]  == 0 ) {
+			if ( ( int ) $result[ 'DS_RESPONSE' ] == 1 ) {
 				WC_Subscriptions_Manager::process_subscription_payments_on_order( $order );
 			}
 		}
@@ -429,17 +471,18 @@ function woocommerce_paytpv_init() {
 		 * receipt_page
 		 * */
 		function receipt_page( $order ) {
-			echo '<p>' . __( 'Gracias por el pedido, por favor rellene los siguientes datos para completar el pago.', 'paytpv' ) . '</p>';
+			echo '<p>' . __( 'Thanks for your order, please fill the data below to process the payment.', 'wc_paytpv' ) . '</p>';
 			echo $this->generate_paytpv_form( $order );
 		}
 
-		function get_client(){
-			if(!isset($this->ws_client)){
-				require_once(dirname(__FILE__) . '/ws_client.php');
-				$this->ws_client= new WS_Client($this->settings);
+		function get_client() {
+			if ( !isset( $this->ws_client ) ) {
+				require_once(dirname( __FILE__ ) . '/ws_client.php');
+				$this->ws_client = new WS_Client( $this->settings );
 			}
 			return $this->ws_client;
 		}
+
 	}
 
 	/**

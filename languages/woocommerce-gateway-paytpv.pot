@@ -1,0 +1,141 @@
+# Pasarela de pago Woocommerce para PayTPV.
+# Copyright (C) 2013 ZhenIT Software
+# This file is distributed under the same license as the woocommerce-gateway-paytpv package.
+# Mikel Martin <mikel@zhenit.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pasarela de pago Woocommerce para PayTPV\n"
+"POT-Creation-Date: 2013-11-19 15:24+0100\n"
+"PO-Revision-Date: 2013-11-19 15:26+0100\n"
+"Last-Translator: Mikel Martin <mikel@ZhenIT.com>\n"
+"Language-Team: ZhenIT Software <info@ZhenIT.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../gateway-paytpv.php:110
+msgid "Enable/Disable"
+msgstr ""
+
+#: ../gateway-paytpv.php:111
+msgid "Enable PayTpv gateway"
+msgstr ""
+
+#: ../gateway-paytpv.php:117
+msgid "Title"
+msgstr ""
+
+#: ../gateway-paytpv.php:119
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: ../gateway-paytpv.php:120
+msgid "Credit Card (by PayTpv)"
+msgstr ""
+
+#: ../gateway-paytpv.php:123
+msgid "Description"
+msgstr ""
+
+#: ../gateway-paytpv.php:125
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+
+#: ../gateway-paytpv.php:126
+msgid "Pay using your credit card in a secure way"
+msgstr ""
+
+#: ../gateway-paytpv.php:129
+msgid "Product type"
+msgstr ""
+
+#: ../gateway-paytpv.php:131
+msgid "Type of paytpv.com product being used."
+msgstr ""
+
+#: ../gateway-paytpv.php:138
+msgid "User name"
+msgstr ""
+
+#: ../gateway-paytpv.php:144
+msgid "Client code"
+msgstr ""
+
+#: ../gateway-paytpv.php:150
+msgid "Terminal"
+msgstr ""
+
+#: ../gateway-paytpv.php:152
+msgid "Terminal number in PayTpv."
+msgstr ""
+
+#: ../gateway-paytpv.php:156
+msgid "Password"
+msgstr ""
+
+#: ../gateway-paytpv.php:158
+msgid "Password for PayTpv product."
+msgstr ""
+
+#: ../gateway-paytpv.php:162
+msgid "Onsite form in embended iframe"
+msgstr ""
+
+#: ../gateway-paytpv.php:184
+msgid "PayTpv Payment Gateway"
+msgstr ""
+
+#: ../gateway-paytpv.php:186
+msgid ""
+"<a href=\"https://PayTpv.com\">PayTpv Online</a> payment gateway for "
+"Woocommerce enables credit card payment in your shop. Al you need is a "
+"PayTpv.com merchant account and access to <a href=\"https://www.paytpv.com/"
+"clientes.php\">customer area</a>"
+msgstr ""
+
+#: ../gateway-paytpv.php:189
+msgid ""
+"There you should configure \"Tipo de notificación del cobro:\" as "
+"\"Notificación por URL\" set ther teh following URL:"
+msgstr ""
+
+#: ../gateway-paytpv.php:231 ../gateway-paytpv.php:252
+#: ../gateway-paytpv.php:279
+msgid "PayTpv payment completed"
+msgstr ""
+
+#: ../gateway-paytpv.php:411
+msgid ""
+"Thank you for your order. We are now redirecting you to PayTpv to make "
+"payment."
+msgstr ""
+
+#: ../gateway-paytpv.php:432
+msgid "Credit Card payment"
+msgstr ""
+
+#: ../gateway-paytpv.php:432
+msgid "Cancel order &amp; restore cart"
+msgstr ""
+
+#: ../gateway-paytpv.php:442
+#, php-format
+msgid ""
+"Use the stored %s credit card to <a href=\"%s\" class=\"button\">pay</a>"
+msgstr ""
+
+#: ../gateway-paytpv.php:443
+msgid "Or use a different credit card instead"
+msgstr ""
+
+#: ../gateway-paytpv.php:475
+msgid ""
+"Thanks for your order, please fill the data below to process the payment."
+msgstr ""

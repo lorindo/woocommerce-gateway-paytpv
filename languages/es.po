@@ -1,0 +1,154 @@
+# Pasarela de pago Woocommerce para PayTPV.
+# Copyright (C) 2013 ZhenIT Software
+# This file is distributed under the same license as the woocommerce-gateway-paytpv package.
+# Mikel Martin <mikel@zhenit.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pasarela de pago Woocommerce para PayTPV\n"
+"POT-Creation-Date: 2013-11-19 15:05+0100\n"
+"PO-Revision-Date: 2013-11-19 15:27+0100\n"
+"Last-Translator: Mikel Martin <mikel@ZhenIT.com>\n"
+"Language-Team: ZhenIT Software <info@ZhenIT.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../gateway-paytpv.php:110
+msgid "Enable/Disable"
+msgstr "Habilitar/Deshabilitar"
+
+#: ../gateway-paytpv.php:111
+msgid "Enable PayTpv gateway"
+msgstr "Habilitar pasarela de pago PayTpv"
+
+#: ../gateway-paytpv.php:117
+msgid "Title"
+msgstr "Título"
+
+#: ../gateway-paytpv.php:119
+msgid "This controls the title which the user sees during checkout."
+msgstr "Esto determina el texto que el usaurio ve en el proceso de compra"
+
+#: ../gateway-paytpv.php:120
+msgid "Credit Card (by PayTpv)"
+msgstr "Tarjeta de crédito o dábito (vía PayTpv)"
+
+#: ../gateway-paytpv.php:123
+msgid "Description"
+msgstr "Descripción"
+
+#: ../gateway-paytpv.php:125
+msgid "This controls the description which the user sees during checkout."
+msgstr "La descripción que el cliente verá  en el proceso de compra"
+
+#: ../gateway-paytpv.php:126
+msgid "Pay using your credit card in a secure way"
+msgstr "Pague con tarjeta de crédito de la forma más segura"
+
+#: ../gateway-paytpv.php:129
+msgid "Product type"
+msgstr "Tipo de producto"
+
+#: ../gateway-paytpv.php:131
+msgid "Type of paytpv.com product being used."
+msgstr "Tipo de producto de paytpv usado"
+
+#: ../gateway-paytpv.php:138
+msgid "User name"
+msgstr "Nombre de usuario"
+
+#: ../gateway-paytpv.php:144
+msgid "Client code"
+msgstr "Código de cliente"
+
+#: ../gateway-paytpv.php:150
+msgid "Terminal"
+msgstr "Número de terminal"
+
+#: ../gateway-paytpv.php:152
+msgid "Terminal number in PayTpv."
+msgstr "Número de terminal indicado en su producto de paytpv.com"
+
+#: ../gateway-paytpv.php:156
+msgid "Password"
+msgstr "Contraseña"
+
+#: ../gateway-paytpv.php:158
+msgid "Password for PayTpv product."
+msgstr "Contraseña para este producto de PayTpv"
+
+#: ../gateway-paytpv.php:162
+msgid "Onsite form in embended iframe"
+msgstr "Mostrar formulario en iframe"
+
+#: ../gateway-paytpv.php:184
+msgid "PayTpv Payment Gateway"
+msgstr "Pasarela de pago PayTpv"
+
+#: ../gateway-paytpv.php:186
+msgid ""
+"<a href=\"https://PayTpv.com\">PayTpv Online</a> payment gateway for "
+"Woocommerce enables credit card payment in your shop. Al you need is a "
+"PayTpv.com merchant account and access to <a href=\"https://www.paytpv.com/"
+"clientes.php\">customer area</a>"
+msgstr ""
+"La pasarela <a href=\"https://PayTpv.com\">PayTpv Online</a> para "
+"Woocommerce le permitirá dar la opción de pago por tarjeta de crédito o "
+"débito en su comercio. Para ello necesitará un tpv virtual de PayTpv. "
+"Conviene que disponga también de acceso al <a href=\"https://www.paytpv.com/"
+"clientes.php\">Área de clientes</a>"
+
+#: ../gateway-paytpv.php:189
+msgid ""
+"There you should configure \"Tipo de notificación del cobro:\" as "
+"\"Notificación por URL\" set ther teh following URL:"
+msgstr ""
+"Allí deberá configurar \"Tipo de notificación del cobro:\" como "
+"\"Notificación por URL\" y configurar ahí la URL:"
+
+#: ../gateway-paytpv.php:231 ../gateway-paytpv.php:252
+#: ../gateway-paytpv.php:279
+msgid "PayTpv payment completed"
+msgstr "Pago en Paytpv completado"
+
+#: ../gateway-paytpv.php:411
+msgid ""
+"Thank you for your order. We are now redirecting you to PayTpv to make "
+"payment."
+msgstr ""
+"Gracias por su pedido. Ahora le estamos redirigiendo a PayTpv para que "
+"finalice el pago."
+
+#: ../gateway-paytpv.php:432
+msgid "Pagar con trajeta de crédito"
+msgstr "Pagar con trajeta de crédito"
+
+#: ../gateway-paytpv.php:432
+msgid "Cancel order &amp; restore cart"
+msgstr "Cancelar el pedido y restaurar la cesta de la compra"
+
+#: ../gateway-paytpv.php:442
+#, php-format
+msgid ""
+"Use the stored %s credit card to <a href=\"%s\" class=\"button\">pay</a>"
+msgstr ""
+"Usar la tarjeta %s que está registrada para <a href=\"%s\" class=\"button"
+"\">pagar</a>"
+
+#: ../gateway-paytpv.php:443
+msgid "Or use a different credit card instead"
+msgstr "O usar una tarjeta diferente"
+
+#: ../gateway-paytpv.php:475
+msgid ""
+"Thanks for your order, please fill the data below to process the payment."
+msgstr ""
+"Gracias por su pedido, pro favor, rellene los siguientes datos para procesar "
+"el pago."

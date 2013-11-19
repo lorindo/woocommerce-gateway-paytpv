@@ -49,6 +49,24 @@ class WS_Client {
 		return $this->client->call( 'execute_purchase', $p, '', '', false, true );
 	}
 
+	function info_user( $idUser, $tokeUser, $ip ) {
+		$DS_MERCHANT_MERCHANTCODE = $this->config[ 'clientcode' ];
+		$DS_MERCHANT_TERMINAL = $this->config[ 'term' ];
+		$DS_IDUSER = $idUser;
+		$DS_TOKEN_USER = $tokeUser;
+		$DS_MERCHANT_MERCHANTSIGNATURE = sha1( $DS_MERCHANT_MERCHANTCODE . $DS_IDUSER . $DS_TOKEN_USER . $DS_MERCHANT_TERMINAL . $this->config[ 'pass' ] );
+		$DS_ORIGINAL_IP = $ip;
+		$p = array(
+			'DS_MERCHANT_MERCHANTCODE' => $DS_MERCHANT_MERCHANTCODE,
+			'DS_MERCHANT_TERMINAL' => $DS_MERCHANT_TERMINAL,
+			'DS_IDUSER' => $DS_IDUSER,
+			'DS_TOKEN_USER' => $DS_TOKEN_USER,
+			'DS_MERCHANT_MERCHANTSIGNATURE' => $DS_MERCHANT_MERCHANTSIGNATURE,
+			'DS_ORIGINAL_IP' => $DS_ORIGINAL_IP
+		);
+		return $this->client->call( 'info_user', $p, '', '', false, true );
+	}
+
 }
 
 /**
