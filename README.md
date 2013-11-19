@@ -9,7 +9,11 @@ Se instala como cualquier otro plugin de wordpress
 
 #####Configuración
 ------------------
-Una vez instalado y activado el plugin, accediendo a Woocommerce -> Ajustes (settings) -> Pagos (Payment Gateways) y pulsando el enalce a "Paytpv" se pude rellenar la información de la cuenta de PayTpv
+Una vez instalado y activado el plugin, accediendo a Woocommerce -> Ajustes (settings) -> Pagos (Payment Gateways) y pulsando el enalce a "Paytpv" se pude rellenar la información de la cuenta de PayTpv.
+
+Las funcionalidedes para pagos recurrentes requierend del plugin woocommerce-suscriptions y de un teminal el paytpv.com de tipo XML BANKSTORE.
+
+Para ventas normales bastan con WooCommerce y un terminal de tipo TPV-WEB
 
 
 
