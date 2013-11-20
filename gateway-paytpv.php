@@ -3,7 +3,7 @@
   Plugin Name: Pasarela de pago para PayTpv
   Plugin URI: http://modulosdepago.es/
   Description: La pasarela de pago PayTpv para WooCommerce
-  Version: 1.0.0-R
+  Version: 2.0.2
   Author: Mikel Martin
   Author URI: http://PayTpv.com/
 
@@ -42,9 +42,6 @@ function woocommerce_paytpv_init() {
 	/**
 	 * Required functions
 	 */
-	if ( !function_exists( 'is_woocommerce_active' ) )
-		require_once( 'zhenit-includes/zhenit-functions.php' );
-
 	if ( !class_exists( 'WC_Payment_Gateway' ) || !WC_PayTpv_Dependencies::woocommerce_active_check() )
 		return;
 
@@ -107,22 +104,22 @@ function woocommerce_paytpv_init() {
 
 			$this->form_fields = array(
 				'enabled' => array(
-					'title' => __( 'Enable/Disable', 'woothemes' ),
+					'title' => __( 'Enable/Disable', 'wc_paytpv' ),
 					'label' => __( 'Enable PayTpv gateway', 'wc_paytpv' ),
 					'type' => 'checkbox',
 					'description' => '',
 					'default' => 'no'
 				),
 				'title' => array(
-					'title' => __( 'Title', 'woothemes' ),
+					'title' => __( 'Title', 'wc_paytpv' ),
 					'type' => 'text',
-					'description' => __( 'This controls the title which the user sees during checkout.', 'woothemes' ),
+					'description' => __( 'This controls the title which the user sees during checkout.', 'wc_paytpv' ),
 					'default' => __( 'Credit Card (by PayTpv)', 'wc_paytpv' )
 				),
 				'description' => array(
-					'title' => __( 'Description', 'woothemes' ),
+					'title' => __( 'Description', 'wc_paytpv' ),
 					'type' => 'textarea',
-					'description' => __( 'This controls the description which the user sees during checkout.', 'woothemes' ),
+					'description' => __( 'This controls the description which the user sees during checkout.', 'wc_paytpv' ),
 					'default' => __( 'Pay using your credit card in a secure way', 'wc_paytpv' ),
 				),
 				'product' => array(
