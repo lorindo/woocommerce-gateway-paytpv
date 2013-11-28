@@ -3,7 +3,7 @@
   Plugin Name: Pasarela de pago para PayTpv
   Plugin URI: http://modulosdepago.es/
   Description: La pasarela de pago PayTpv para WooCommerce
-  Version: 2.0.2
+  Version: 2.0.3
   Author: Mikel Martin
   Author URI: http://PayTpv.com/
 
