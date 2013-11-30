@@ -9,6 +9,16 @@ class WS_Client {
 	var $client = null;
 	var $config = null;
 
+	private function write_log($log){
+      if ( true === WP_DEBUG ) {
+          if ( is_array( $log ) || is_object( $log ) ) {
+              error_log( print_r( $log, true ), $file );
+          } else {
+              error_log( $log, $file );
+          }
+      }
+	}
+
 	public function __construct( array $config = array( ), $proxyhost = '', $proxyport = '', $proxyusername = '', $proxypassword = '' ) {
 		$useCURL = isset( $_POST[ 'usecurl' ] ) ? $_POST[ 'usecurl' ] : '0';
 		$this->config = $config;
@@ -16,8 +26,8 @@ class WS_Client {
 						$proxyhost, $proxyport, $proxyusername, $proxypassword );
 		$err = $this->client->getError();
 		if ( $err ) {
-			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
-			echo '<h2>Debug</h2><pre>' . htmlspecialchars( $client->getDebug(), ENT_QUOTES ) . '</pre>';
+			$this->write_log($err);
+			$this->write_log('Debug: '.$client->getDebug());
 			exit();
 		}
 		$this->client->setUseCurl( $useCURL );
@@ -46,7 +56,10 @@ class WS_Client {
 			'DS_MERCHANT_PRODUCTDESCRIPTION' => '',
 			'DS_MERCHANT_OWNER' => ''
 		);
-		return $this->client->call( 'execute_purchase', $p, '', '', false, true );
+		$this->write_log("Petición execute_purchase:\n".print_r($p,true));
+		$res = $this->client->call( 'execute_purchase', $p, '', '', false, true );
+		$this->write_log("Respuesta execute_purchase:\n".print_r($res,true));
+		return $res;
 	}
 
 	function info_user( $idUser, $tokeUser, $ip ) {
@@ -64,7 +77,10 @@ class WS_Client {
 			'DS_MERCHANT_MERCHANTSIGNATURE' => $DS_MERCHANT_MERCHANTSIGNATURE,
 			'DS_ORIGINAL_IP' => $DS_ORIGINAL_IP
 		);
-		return $this->client->call( 'info_user', $p, '', '', false, true );
+		write_log("Petición info_user:\n".print_r($p,true));
+		$res = $this->client->call( 'info_user', $p, '', '', false, true );
+		write_log("Respuesta info_user:\n".print_r($p,true));
+		return $res;
 	}
 
 }

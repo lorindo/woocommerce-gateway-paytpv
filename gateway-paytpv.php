@@ -3,7 +3,7 @@
   Plugin Name: Pasarela de pago para PayTpv
   Plugin URI: http://modulosdepago.es/
   Description: La pasarela de pago PayTpv para WooCommerce
-  Version: 2.0.3
+  Version: 2.0.4
   Author: Mikel Martin
   Author URI: http://PayTpv.com/
 
@@ -53,6 +53,16 @@ function woocommerce_paytpv_init() {
 	class woocommerce_paytpv extends WC_Payment_Gateway {
 
 		private $ws_client;
+
+		private function write_log($log){
+			if ( true === WP_DEBUG ) {
+				if ( is_array( $log ) || is_object( $log ) ) {
+					error_log( print_r( $log, true ), $file );
+				} else {
+					error_log( $log, $file );
+				}
+			}
+		}
 
 		public function __construct() {
 			$this->id = 'paytpv';
@@ -445,7 +455,7 @@ function woocommerce_paytpv_init() {
 		}
 
 		function process_payment( $order_id ) {
-
+			write_log('Process payment: '.$order_id);
 			$order = new WC_Order( $order_id );
 			return array(
 				'result' => 'success',
@@ -457,6 +467,7 @@ function woocommerce_paytpv_init() {
 		 * Operaciones sucesivas
 		 * */
 		function scheduled_subscription_payment( $amount_to_charge, $order, $product_id ) {
+		    write_log('scheduled_subscription_payment: '.$amount_to_charge.'€ '.$order_id);
 			$client = $this->get_client();
 			$result = $client->execute_purchase( $order, $amount_to_charge );
 			if ( ( int ) $result[ 'DS_RESPONSE' ] == 1 ) {
