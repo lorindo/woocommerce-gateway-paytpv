@@ -455,7 +455,7 @@ function woocommerce_paytpv_init() {
 		}
 
 		function process_payment( $order_id ) {
-			write_log('Process payment: '.$order_id);
+			$this->write_log('Process payment: '.$order_id);
 			$order = new WC_Order( $order_id );
 			return array(
 				'result' => 'success',
@@ -467,7 +467,7 @@ function woocommerce_paytpv_init() {
 		 * Operaciones sucesivas
 		 * */
 		function scheduled_subscription_payment( $amount_to_charge, $order, $product_id ) {
-		    write_log('scheduled_subscription_payment: '.$amount_to_charge.'€ '.$order_id);
+		    $this->write_log('scheduled_subscription_payment: '.$amount_to_charge.'€ '.$order_id);
 			$client = $this->get_client();
 			$result = $client->execute_purchase( $order, $amount_to_charge );
 			if ( ( int ) $result[ 'DS_RESPONSE' ] == 1 ) {
