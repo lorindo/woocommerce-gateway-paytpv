@@ -57,9 +57,9 @@ function woocommerce_paytpv_init() {
 		private function write_log($log){
 			if ( true === WP_DEBUG ) {
 				if ( is_array( $log ) || is_object( $log ) ) {
-					error_log( print_r( $log, true ), $file );
+					error_log( print_r( $log, true ));
 				} else {
-					error_log( $log, $file );
+					error_log( $log);
 				}
 			}
 		}
@@ -467,9 +467,11 @@ function woocommerce_paytpv_init() {
 		 * Operaciones sucesivas
 		 * */
 		function scheduled_subscription_payment( $amount_to_charge, $order, $product_id ) {
-		    $this->write_log('scheduled_subscription_payment: '.$amount_to_charge.'€ '.$order_id);
+		    $this->write_log('scheduled_subscription_payment: '.$amount_to_charge.'€ '.$order->id);
+			$subscription_key = WC_Subscriptions_Manager::get_subscription_key( $order->id, $product_id );
+			$subscription = WC_Subscriptions_Manager::get_users_subscription( $order->customer_user, $subscription_key );
 			$client = $this->get_client();
-			$result = $client->execute_purchase( $order, $amount_to_charge );
+			$result = $client->execute_purchase( $order, $amount_to_charge,$subscription['order_id'] );
 			if ( ( int ) $result[ 'DS_RESPONSE' ] == 1 ) {
 				WC_Subscriptions_Manager::process_subscription_payments_on_order( $order );
 			}
