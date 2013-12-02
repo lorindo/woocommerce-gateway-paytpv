@@ -39,7 +39,8 @@ class WS_Client {
 		$DS_IDUSER = get_post_meta( ( int ) $order->id, 'IdUser', true );
 		$DS_TOKEN_USER = get_post_meta( ( int ) $order->id, 'TokenUser', true );
 		$DS_MERCHANT_AMOUNT = $amount * 100;
-		$DS_MERCHANT_ORDER = time();
+//		$DS_MERCHANT_ORDER = time();
+		$DS_MERCHANT_ORDER = str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . date( 'is' );
 		$DS_MERCHANT_CURRENCY = get_woocommerce_currency();
 		$DS_MERCHANT_MERCHANTSIGNATURE = sha1( $DS_MERCHANT_MERCHANTCODE . $DS_IDUSER . $DS_TOKEN_USER . $DS_MERCHANT_TERMINAL . $DS_MERCHANT_AMOUNT . $DS_MERCHANT_ORDER . $this->config[ 'pass' ] );
 		$DS_ORIGINAL_IP = get_post_meta( ( int ) $order->id, '_customer_ip_address', true );
