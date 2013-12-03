@@ -42,7 +42,7 @@ class WS_Client {
 		if($ref=='')
 			$DS_MERCHANT_ORDER = time();
 		else
-			$DS_MERCHANT_ORDER = str_pad( $ref, 8, "0", STR_PAD_LEFT ) . date( 'is' );
+			$DS_MERCHANT_ORDER = str_pad( $ref, 8, "0", STR_PAD_LEFT ) . round(rand(0,99));
 		$DS_MERCHANT_CURRENCY = get_woocommerce_currency();
 		$DS_MERCHANT_MERCHANTSIGNATURE = sha1( $DS_MERCHANT_MERCHANTCODE . $DS_IDUSER . $DS_TOKEN_USER . $DS_MERCHANT_TERMINAL . $DS_MERCHANT_AMOUNT . $DS_MERCHANT_ORDER . $this->config[ 'pass' ] );
 		$DS_ORIGINAL_IP = get_post_meta( ( int ) $order->id, '_customer_ip_address', true );
@@ -80,9 +80,9 @@ class WS_Client {
 			'DS_MERCHANT_MERCHANTSIGNATURE' => $DS_MERCHANT_MERCHANTSIGNATURE,
 			'DS_ORIGINAL_IP' => $DS_ORIGINAL_IP
 		);
-		write_log("Petición info_user:\n".print_r($p,true));
+		$this->write_log("Petición info_user:\n".print_r($p,true));
 		$res = $this->client->call( 'info_user', $p, '', '', false, true );
-		write_log("Respuesta info_user:\n".print_r($p,true));
+		$this->write_log("Respuesta info_user:\n".print_r($p,true));
 		return $res;
 	}
 

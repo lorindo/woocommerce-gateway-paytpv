@@ -3,7 +3,7 @@
   Plugin Name: Pasarela de pago para PayTpv
   Plugin URI: http://modulosdepago.es/
   Description: La pasarela de pago PayTpv para WooCommerce
-  Version: 2.0.5
+  Version: 2.0.7
   Author: Mikel Martin
   Author URI: http://PayTpv.com/
 
@@ -54,12 +54,12 @@ function woocommerce_paytpv_init() {
 
 		private $ws_client;
 
-		private function write_log($log){
+		private function write_log( $log ) {
 			if ( true === WP_DEBUG ) {
 				if ( is_array( $log ) || is_object( $log ) ) {
-					error_log( print_r( $log, true ));
+					error_log( print_r( $log, true ) );
 				} else {
-					error_log( $log);
+					error_log( $log );
 				}
 			}
 		}
@@ -105,6 +105,8 @@ function woocommerce_paytpv_init() {
 			add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 			add_action( 'woocommerce_api_woocommerce_' . $this->id, array( $this, 'check_' . $this->id . '_resquest' ) );
 			add_action( 'scheduled_subscription_payment_' . $this->id, array( $this, 'scheduled_subscription_payment' ), 10, 3 );
+
+			add_filter( 'woocommerce_subscriptions_renewal_order_meta_query', array( $this, 'store_renewal_order_id' ), 10, 4 );
 		}
 
 		/**
@@ -190,13 +192,13 @@ function woocommerce_paytpv_init() {
 			?>
 			<h3><?php _e( 'PayTpv Payment Gateway', 'wc_paytpv' ); ?></h3>
 			<p>
-				<?php _e('<a href="https://PayTpv.com">PayTpv Online</a> payment gateway for Woocommerce enables credit card payment in your shop. Al you need is a PayTpv.com merchant account and access to <a href="https://www.paytpv.com/clientes.php">customer area</a>');?>
+				<?php _e( '<a href="https://PayTpv.com">PayTpv Online</a> payment gateway for Woocommerce enables credit card payment in your shop. Al you need is a PayTpv.com merchant account and access to <a href="https://www.paytpv.com/clientes.php">customer area</a>' ); ?>
 			</p>
 			<p>
-				<?php _e('There you should configure "Tipo de notificación del cobro:" as "Notificación por URL" set ther teh following URL:');?> <?php echo add_query_arg( 'tpvLstr', 'notify', add_query_arg( 'wc-api', 'woocommerce_' . $this->id, home_url( '/' ) ) ); ?></p>
+				<?php _e( 'There you should configure "Tipo de notificación del cobro:" as "Notificación por URL" set ther teh following URL:' ); ?> <?php echo add_query_arg( 'tpvLstr', 'notify', add_query_arg( 'wc-api', 'woocommerce_' . $this->id, home_url( '/' ) ) ); ?></p>
 			</p>
 			<table class="form-table">
-			<?php $this->generate_settings_html(); ?>
+				<?php $this->generate_settings_html(); ?>
 			</table><!--/.form-table-->
 			<?php
 		}
@@ -266,14 +268,14 @@ function woocommerce_paytpv_init() {
 				if ( $_GET[ 'tpvLstr' ] == 'notify' ) {//NOTIFICACIÓN
 					$AMOUNT = round( $order->get_order_total() * 100 );
 					$CURRENCY = get_woocommerce_currency();
-					$mensaje =	$this->clientcode .
-								$this->term .
-								$_REQUEST[ 'TransactionType' ] .
-								$_REQUEST[ 'Order' ] .
-								$AMOUNT .
-								$CURRENCY;
+					$mensaje = $this->clientcode .
+							$this->term .
+							$_REQUEST[ 'TransactionType' ] .
+							$_REQUEST[ 'Order' ] .
+							$AMOUNT .
+							$CURRENCY;
 					$SIGNATURE = md5( $mensaje . md5( $this->pass ) . $_REQUEST[ 'BankDateTime' ] . $_REQUEST[ 'Response' ] );
-					if ( $_REQUEST[ 'TransactionType' ] == '1' && $_REQUEST[ 'Response' ] == 'OK' && $_REQUEST['ExtendedSignature']==$SIGNATURE  ) {
+					if ( $_REQUEST[ 'TransactionType' ] == '1' && $_REQUEST[ 'Response' ] == 'OK' && $_REQUEST[ 'ExtendedSignature' ] == $SIGNATURE ) {
 						update_post_meta( ( int ) $order->id, 'IdUser', $_REQUEST[ 'IdUser' ] );
 						update_post_meta( ( int ) $order->id, 'TokenUser', $_REQUEST[ 'TokenUser' ] );
 						update_user_meta( ( int ) $order->user_id, 'IdUser', $_REQUEST[ 'IdUser' ] );
@@ -338,7 +340,7 @@ function woocommerce_paytpv_init() {
 		function get_paytpv_bankstore_args( $order ) {
 			$OPERATION = '1';
 			//$URLOK		= add_query_arg('tpvLstr','notify',add_query_arg( 'wc-api', 'woocommerce_'. $this->id, home_url( '/' ) ) );
-			$MERCHANT_ORDER = str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . date( 'is' );
+			$MERCHANT_ORDER = str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . round( rand( 0, 99 ) );
 			$MERCHANT_AMOUNT = round( $order->get_order_total() * 100 );
 			$MERCHANT_CURRENCY = get_woocommerce_currency();
 			$URLOK = $this->get_return_url( $order );
@@ -368,7 +370,7 @@ function woocommerce_paytpv_init() {
 			//$URLOK		= add_query_arg('tpvLstr','notify',add_query_arg( 'wc-api', 'woocommerce_'. $this->id, home_url( '/' ) ) );
 			$URLOK = $this->get_return_url( $order );
 			$URLKO = $order->get_cancel_order_url();
-			$REFERENCE = str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . date( 'is' );
+			$REFERENCE = str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . round( rand( 0, 99 ) );
 			$AMOUNT = round( $order->get_order_total() * 100 );
 			$CONCEPT = ''; //@todo set concept
 			$paytpv_req_args = array( );
@@ -402,8 +404,8 @@ function woocommerce_paytpv_init() {
 
 			$order = new WC_Order( $order_id );
 			$paytpv_args = $this->get_paytpv_args( $order );
-			$is_recurring = class_exists( 'WC_Subscriptions_Order' ) && WC_Subscriptions_Order::order_contains_subscription( $order->id ) ;
-			if ( $this->iframe == 'no' && !$is_recurring):
+			$is_recurring = class_exists( 'WC_Subscriptions_Order' ) && WC_Subscriptions_Order::order_contains_subscription( $order->id );
+			if ( $this->iframe == 'no' && !$is_recurring ):
 				$paytpv_adr = $this->url;
 
 				$paytpv_args_array = array( );
@@ -442,7 +444,7 @@ function woocommerce_paytpv_init() {
 				$PAN = get_user_meta( ( int ) $order->user_id, 'PAN', true );
 				if ( $PAN != '' ) {
 					$url_pay = add_query_arg( array(
-						'Order' => str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . date( 'is' ),
+						'Order' => str_pad( $order->id, 8, "0", STR_PAD_LEFT ) . round( rand( 0, 99 ) ),
 						'tpvLstr' => 'pay',
 						'wc-api' => 'woocommerce_' . $this->id ), home_url( '/' ) );
 					$html .= '<div id="card_reuse">' . sprintf( __( 'Use the stored %s credit card to <a href="%s" class="button">pay</a>', 'wc_paytpv' ), $PAN, $url_pay ) . '</div>';
@@ -455,7 +457,7 @@ function woocommerce_paytpv_init() {
 		}
 
 		function process_payment( $order_id ) {
-			$this->write_log('Process payment: '.$order_id);
+			$this->write_log( 'Process payment: ' . $order_id );
 			$order = new WC_Order( $order_id );
 			return array(
 				'result' => 'success',
@@ -467,14 +469,27 @@ function woocommerce_paytpv_init() {
 		 * Operaciones sucesivas
 		 * */
 		function scheduled_subscription_payment( $amount_to_charge, $order, $product_id ) {
-		    $this->write_log('scheduled_subscription_payment: '.$amount_to_charge.'€ '.$order->id);
-			$subscription_key = WC_Subscriptions_Manager::get_subscription_key( $order->id, $product_id );
-			$subscription = WC_Subscriptions_Manager::get_users_subscription( $order->customer_user, $subscription_key );
+			$this->write_log( 'scheduled_subscription_payment: ' . $amount_to_charge . '€ ' . $order->id );
 			$client = $this->get_client();
-			$result = $client->execute_purchase( $order, $amount_to_charge,$subscription['order_id'] );
+			$result = $client->execute_purchase( $order, $amount_to_charge );
 			if ( ( int ) $result[ 'DS_RESPONSE' ] == 1 ) {
 				WC_Subscriptions_Manager::process_subscription_payments_on_order( $order );
+				$ref = get_post_meta( ( int ) $order->id, '_next_paytpv_ref', true );
+				update_post_meta( $ref, 'referencia_paytpv', $result[ 'DS_MERCHANT_ORDER' ] );
 			}
+		}
+
+		/*
+		 * Guardamos el $renewal_order_id para usarlo como id de la sucesiva
+		 */
+
+		function store_renewal_order_id( $order_meta_query, $original_order_id, $renewal_order_id, $new_order_role ) {
+
+			if ( 'parent' == $new_order_role )
+				$order_meta_query .= " AND `meta_key` NOT LIKE 'TokenUser' "
+						. " AND `meta_key` NOT LIKE 'IdUser' ";
+			update_post_meta( $original_order_id, '_next_paytpv_ref', $renewal_order_id );
+			return $order_meta_query;
 		}
 
 		/**
