@@ -2,8 +2,8 @@
 Contributors: m1k3lm
 Tags: woocommerce, payment gateway
 Requires at least: 3.0.1
-Tested up to: 3.7.1
-Stable tag: 2.0.3
+Tested up to: 3.8
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,12 @@ En la nueva versión 2.0.1-R se ha añadido la operativa de pagos recurrentes co
 1. configuration screen
 
 == Changelog ==
+= 2.0.8 =
+* Compatibildad con tpvs en modo seguro para la operativa BankStore
+
+= 2.0.7 =
+* Añadir custom field en los pedidos sucesivos con la referencia del pago en paytpv.com
+
 = 2.0.3 =
 * Corrección de errores en el empaquetado para wordpress.org
 

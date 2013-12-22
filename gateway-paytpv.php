@@ -3,7 +3,7 @@
   Plugin Name: Pasarela de pago para PayTpv
   Plugin URI: http://modulosdepago.es/
   Description: La pasarela de pago PayTpv para WooCommerce
-  Version: 2.0.7
+  Version: 2.0.8
   Author: Mikel Martin
   Author URI: http://PayTpv.com/
 
@@ -99,6 +99,7 @@ function woocommerce_paytpv_init() {
 			$this->currency = get_woocommerce_currency();
 			$this->pass = $this->settings[ 'pass' ];
 			$this->iframe = $this->settings[ 'iframe' ];
+			$this->secure = $this->settings[ '3dsecure' ]=='yes';
 
 			// Hooks
 			add_action( 'woocommerce_receipt_' . $this->id, array( $this, 'receipt_page' ) );
@@ -146,7 +147,7 @@ function woocommerce_paytpv_init() {
 				'usercode' => array(
 					'title' => __( 'User name', 'wc_paytpv' ),
 					'type' => 'text',
-					'description' => '',
+					'description' => __( 'Only for TPV WEB', 'wc_paytpv' ),
 					'default' => ''
 				),
 				'clientcode' => array(
@@ -167,9 +168,16 @@ function woocommerce_paytpv_init() {
 					'description' => __( 'Password for PayTpv product.', 'wc_paytpv' ),
 					'default' => ''
 				),
+				'3dsecure' => array(
+					'title' => __( 'Payment gateway in securized mode', 'wc_paytpv' ),
+					'label' => '',
+					'description' => __( 'Only for XML SOAP RECURRENTE', 'wc_paytpv' ),
+					'type' => 'checkbox',
+					'default' => 'no'
+				),
 				'iframe' => array(
 					'title' => __( 'Onsite form in embended iframe', 'wc_paytpv' ),
-					'label' => __( '', 'wc_paytpv' ),
+					'label' => '',
 					'type' => 'checkbox',
 					'default' => 'yes'
 				),
@@ -361,7 +369,8 @@ function woocommerce_paytpv_init() {
 				'URLOK' => $URLOK,
 				'URLKO' => $URLKO
 			);
-
+			if($this->secure)
+				$paytpv_args['3DSECURE']='1';
 			return array_merge( $paytpv_args, $paytpv_req_args );
 		}
 

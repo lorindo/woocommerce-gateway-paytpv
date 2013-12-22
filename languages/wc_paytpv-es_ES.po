@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pasarela de pago Woocommerce para PayTPV\n"
-"POT-Creation-Date: 2013-11-19 15:05+0100\n"
-"PO-Revision-Date: 2013-11-19 15:27+0100\n"
+"POT-Creation-Date: 2013-12-20 18:32+0100\n"
+"PO-Revision-Date: 2013-12-20 18:33+0100\n"
 "Last-Translator: Mikel Martin <mikel@ZhenIT.com>\n"
 "Language-Team: ZhenIT Software <info@ZhenIT.com>\n"
 "Language: es\n"
@@ -20,79 +20,91 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../gateway-paytpv.php:110
+#: ../gateway-paytpv.php:120
 msgid "Enable/Disable"
 msgstr "Habilitar/Deshabilitar"
 
-#: ../gateway-paytpv.php:111
+#: ../gateway-paytpv.php:121
 msgid "Enable PayTpv gateway"
 msgstr "Habilitar pasarela de pago PayTpv"
 
-#: ../gateway-paytpv.php:117
+#: ../gateway-paytpv.php:127
 msgid "Title"
 msgstr "Título"
 
-#: ../gateway-paytpv.php:119
+#: ../gateway-paytpv.php:129
 msgid "This controls the title which the user sees during checkout."
 msgstr "Esto determina el texto que el usaurio ve en el proceso de compra"
 
-#: ../gateway-paytpv.php:120
+#: ../gateway-paytpv.php:130
 msgid "Credit Card (by PayTpv)"
 msgstr "Tarjeta de crédito o dábito (vía PayTpv)"
 
-#: ../gateway-paytpv.php:123
+#: ../gateway-paytpv.php:133
 msgid "Description"
 msgstr "Descripción"
 
-#: ../gateway-paytpv.php:125
+#: ../gateway-paytpv.php:135
 msgid "This controls the description which the user sees during checkout."
 msgstr "La descripción que el cliente verá  en el proceso de compra"
 
-#: ../gateway-paytpv.php:126
+#: ../gateway-paytpv.php:136
 msgid "Pay using your credit card in a secure way"
 msgstr "Pague con tarjeta de crédito de la forma más segura"
 
-#: ../gateway-paytpv.php:129
+#: ../gateway-paytpv.php:139
 msgid "Product type"
 msgstr "Tipo de producto"
 
-#: ../gateway-paytpv.php:131
+#: ../gateway-paytpv.php:141
 msgid "Type of paytpv.com product being used."
 msgstr "Tipo de producto de paytpv usado"
 
-#: ../gateway-paytpv.php:138
+#: ../gateway-paytpv.php:148
 msgid "User name"
 msgstr "Nombre de usuario"
 
-#: ../gateway-paytpv.php:144
+#: ../gateway-paytpv.php:150
+msgid "Only for TPV WEB"
+msgstr "Solo para TPV WEB"
+
+#: ../gateway-paytpv.php:154
 msgid "Client code"
 msgstr "Código de cliente"
 
-#: ../gateway-paytpv.php:150
+#: ../gateway-paytpv.php:160
 msgid "Terminal"
 msgstr "Número de terminal"
 
-#: ../gateway-paytpv.php:152
+#: ../gateway-paytpv.php:162
 msgid "Terminal number in PayTpv."
 msgstr "Número de terminal indicado en su producto de paytpv.com"
 
-#: ../gateway-paytpv.php:156
+#: ../gateway-paytpv.php:166
 msgid "Password"
 msgstr "Contraseña"
 
-#: ../gateway-paytpv.php:158
+#: ../gateway-paytpv.php:168
 msgid "Password for PayTpv product."
 msgstr "Contraseña para este producto de PayTpv"
 
-#: ../gateway-paytpv.php:162
+#: ../gateway-paytpv.php:172
+msgid "Payment gateway in securized mode"
+msgstr "Tpv virtual en modo securizado"
+
+#: ../gateway-paytpv.php:174
+msgid "Only for XML SOAP RECURRENTE"
+msgstr "Solo para XML SOAP RECURRENTE"
+
+#: ../gateway-paytpv.php:179
 msgid "Onsite form in embended iframe"
 msgstr "Mostrar formulario en iframe"
 
-#: ../gateway-paytpv.php:184
+#: ../gateway-paytpv.php:201
 msgid "PayTpv Payment Gateway"
 msgstr "Pasarela de pago PayTpv"
 
-#: ../gateway-paytpv.php:186
+#: ../gateway-paytpv.php:203
 msgid ""
 "<a href=\"https://PayTpv.com\">PayTpv Online</a> payment gateway for "
 "Woocommerce enables credit card payment in your shop. Al you need is a "
@@ -105,7 +117,7 @@ msgstr ""
 "Conviene que disponga también de acceso al <a href=\"https://www.paytpv.com/"
 "clientes.php\">Área de clientes</a>"
 
-#: ../gateway-paytpv.php:189
+#: ../gateway-paytpv.php:206
 msgid ""
 "There you should configure \"Tipo de notificación del cobro:\" as "
 "\"Notificación por URL\" set ther teh following URL:"
@@ -113,12 +125,12 @@ msgstr ""
 "Allí deberá configurar \"Tipo de notificación del cobro:\" como "
 "\"Notificación por URL\" y configurar ahí la URL:"
 
-#: ../gateway-paytpv.php:231 ../gateway-paytpv.php:252
-#: ../gateway-paytpv.php:279
+#: ../gateway-paytpv.php:248 ../gateway-paytpv.php:269
+#: ../gateway-paytpv.php:295
 msgid "PayTpv payment completed"
 msgstr "Pago en Paytpv completado"
 
-#: ../gateway-paytpv.php:411
+#: ../gateway-paytpv.php:428
 msgid ""
 "Thank you for your order. We are now redirecting you to PayTpv to make "
 "payment."
@@ -126,15 +138,15 @@ msgstr ""
 "Gracias por su pedido. Ahora le estamos redirigiendo a PayTpv para que "
 "finalice el pago."
 
-#: ../gateway-paytpv.php:432
-msgid "Pagar con trajeta de crédito"
-msgstr "Pagar con trajeta de crédito"
+#: ../gateway-paytpv.php:449
+msgid "Credit Card payment"
+msgstr "Tarjeta de crédito o débito (vía PayTpv)"
 
-#: ../gateway-paytpv.php:432
+#: ../gateway-paytpv.php:449
 msgid "Cancel order &amp; restore cart"
 msgstr "Cancelar el pedido y restaurar la cesta de la compra"
 
-#: ../gateway-paytpv.php:442
+#: ../gateway-paytpv.php:459
 #, php-format
 msgid ""
 "Use the stored %s credit card to <a href=\"%s\" class=\"button\">pay</a>"
@@ -142,13 +154,16 @@ msgstr ""
 "Usar la tarjeta %s que está registrada para <a href=\"%s\" class=\"button"
 "\">pagar</a>"
 
-#: ../gateway-paytpv.php:443
+#: ../gateway-paytpv.php:460
 msgid "Or use a different credit card instead"
 msgstr "O usar una tarjeta diferente"
 
-#: ../gateway-paytpv.php:475
+#: ../gateway-paytpv.php:508
 msgid ""
 "Thanks for your order, please fill the data below to process the payment."
 msgstr ""
 "Gracias por su pedido, pro favor, rellene los siguientes datos para procesar "
 "el pago."
+
+#~ msgid "Pagar con trajeta de crédito"
+#~ msgstr "Pagar con trajeta de crédito"
